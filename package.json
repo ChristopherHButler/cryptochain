@@ -13,5 +13,8 @@
   "devDependencies": {
     "jest": "^23.6.0",
     "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "hex-to-binary": "^1.0.1"
   }
 }
