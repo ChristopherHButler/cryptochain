@@ -5,6 +5,7 @@ const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 const CHANNELS = {
   TEST: 'test',
   BLOCKCHAIN: 'blockchain',
+  TRANSACTION: 'transaction',
 };
 
 const MINE_RATE = 1000;

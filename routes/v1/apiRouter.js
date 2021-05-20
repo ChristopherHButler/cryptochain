@@ -25,4 +25,18 @@ router.get('/blocks', apiController.getBlocks);
 router.post('/mine', apiController.mineBlock);
 
 
+
+// @desc:   Get the transaction pool map
+// @route:  GET /api/v1/transactionPoolMap
+// @access: Public
+router.get('/transactionPoolMap', apiController.getTransactionPoolMap);
+
+
+
+// @desc:   Create a transaction
+// @route:  POST /api/v1/createTransaction
+// @access: Public
+router.post('/createTransaction', apiController.createTransaction);
+
+
 module.exports = router;
