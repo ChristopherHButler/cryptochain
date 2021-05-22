@@ -9,18 +9,22 @@ const app = express();
 const Blockchain = require('./blockchain/blockchain');
 const PubSub = require('./network/pubsub');
 const TransactionPool = require('./wallet/transaction-pool');
+const TransactionMiner = require('./network/transaction-miner');
 const Wallet = require('./wallet/wallet');
+const Transaction = require('./wallet/transaction');
 
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
 const pubsub = new PubSub({ blockchain, transactionPool });
+const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
 module.exports = {
   blockchain: blockchain,
   pubsub: pubsub,
   transactionPool: transactionPool,
   wallet: wallet,
+  transactionMiner: transactionMiner,
 };
 
 setTimeout(() => pubsub.broadcastChain(), 1000);

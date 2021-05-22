@@ -1,12 +1,15 @@
 
 const asyncHandler = require('../../middleware/async');
+const Wallet = require('../../wallet/wallet');
 
-const { 
+const {
   blockchain,
   pubsub,
   transactionPool,
   wallet,
+  transactionMiner,
 } = require('../../index');
+
 
 
 
@@ -44,6 +47,16 @@ exports.mineBlock = asyncHandler(async (req, res, next) => {
 
 
 
+// @desc:   Create a transaction
+// @route:  GET /api/v1/mineTransactions
+// @access: Public
+exports.mineTransactions = asyncHandler(async (req, res, next) => {
+  transactionMiner.mineTransactions();
+
+  res.redirect('/api/v1/blocks');
+});
+
+
 // @desc:   Get the transaction pool map
 // @route:  GET /api/v1/transactionPoolMap
 // @access: Public
@@ -65,7 +78,7 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
     if (transaction) {
       transaction.update({ senderWallet: wallet, recipient, amount });
     } else {
-      transaction = wallet.createTransaction({ recipient, amount });
+      transaction = wallet.createTransaction({ recipient, amount, chain: blockchain.chain });
     }
   } catch (error) {
     return res.status(400).json({ status: 'error', message: error.message });
@@ -77,4 +90,20 @@ exports.createTransaction = asyncHandler(async (req, res, next) => {
 
   res.json({ status: 'success', data: transaction });
 
+});
+
+
+
+// @desc:   Get wallet info
+// @route:  GET /api/v1/walletInformation
+// @access: Public
+exports.walletInformation = asyncHandler(async (req, res, next) => {
+
+  res.json({
+    status: 'success',
+    data: {
+      address: wallet.publicKey,
+      balance: Wallet.calculateBalance({ chain: blockchain.chain, address: wallet.publicKey }),
+    },
+  });
 });

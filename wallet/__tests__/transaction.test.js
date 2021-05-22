@@ -1,7 +1,7 @@
 const { verifySignature } = require('../../helpers/keys');
 const Transaction = require('../transaction');
 const Wallet = require('../wallet');
-
+const { REWARD_INPUT, MINING_REWARD } = require('../../constants/constants');
 
 
 describe('Transaction', () => {
@@ -148,5 +148,24 @@ describe('Transaction', () => {
         expect(() => { transaction.update({ senderWallet, recipient: 'foo', amount: 999999 })}).toThrow('Amount exceeds balance');
       });
     });
+  });
+
+  describe('rewardTransaction()', () => {
+    let rewardTransaction, minerWallet;
+
+    beforeEach(() => {
+      minerWallet = new Wallet();
+      rewardTransaction = Transaction.rewardTransaction({ minerWallet });
+    });
+
+    it('creates a transaction with the reward input', () => {
+      expect(rewardTransaction.input).toEqual(REWARD_INPUT);
+    });
+
+
+    it('creates a transaction for the miner with the `MINING_REWARD`', () => {
+      expect(rewardTransaction.outputMap[minerWallet.publicKey]).toEqual(MINING_REWARD);
+    });
+
   });
 });

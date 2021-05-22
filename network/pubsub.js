@@ -23,7 +23,9 @@ class PubSub {
     switch (channel) {
       case CHANNELS.BLOCKCHAIN:
         // relpace the chain if a longer and valid one is recieved as a message
-        this.blockchain.replaceChain(parsedMessage);
+        this.blockchain.replaceChain(parsedMessage, true, () => {
+          this.transactionPool.clearBlockchainTransactions({ chain: parsedMessage });
+        });
         break;
       case CHANNELS.TRANSACTION:
         this.transactionPool.setTransaction(parsedMessage);

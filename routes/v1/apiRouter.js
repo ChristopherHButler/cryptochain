@@ -26,6 +26,13 @@ router.post('/mine', apiController.mineBlock);
 
 
 
+// @desc:   Create a transaction
+// @route:  GET /api/v1/mineTransactions
+// @access: Public
+router.get('/mineTransactions', apiController.mineTransactions);
+
+
+
 // @desc:   Get the transaction pool map
 // @route:  GET /api/v1/transactionPoolMap
 // @access: Public
@@ -37,6 +44,20 @@ router.get('/transactionPoolMap', apiController.getTransactionPoolMap);
 // @route:  POST /api/v1/createTransaction
 // @access: Public
 router.post('/createTransaction', apiController.createTransaction);
+
+
+
+// @desc:   Create a transaction
+// @route:  GET /api/v1/mineTransactions
+// @access: Public
+router.get('/mineTransactions', apiController.mineTransactions);
+
+
+
+// @desc:   Get wallet info
+// @route:  GET /api/v1/walletInformation
+// @access: Public
+router.get('/walletInformation', apiController.walletInformation);
 
 
 module.exports = router;
