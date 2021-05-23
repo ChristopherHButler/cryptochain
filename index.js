@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const request = require('request');
 const colors = require('colors');
@@ -35,6 +36,16 @@ app.use(express.json());
 
 // route handlers
 app.use('/api/v1', require('./routes/v1/apiRouter'));
+
+// serve static assets in production
+// if (process.env.NODE_ENV === constants.NODE_ENVS.PRODUCTION) {
+  // set static folder
+  app.use(express.static(path.join(__dirname, 'client/dist')));
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+  });
+// }
 
 // sync chains
 const syncWithRootState = () => {
