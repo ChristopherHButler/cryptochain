@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import Wallet from './Wallet';
+import Blocks from './Blocks';
 
 
 const App = () => {
+
   return (
     <div>
-      Welcome to Cryptochain
+      <h1>Welcome to Cryptochain</h1>
+      <Wallet />
+      <Blocks />
     </div>
   )
 }

@@ -14,6 +14,8 @@ const TransactionMiner = require('./network/transaction-miner');
 const Wallet = require('./wallet/wallet');
 const Transaction = require('./wallet/transaction');
 
+const { generateTransactions } = require('./data/seeder');
+
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
@@ -69,6 +71,9 @@ const syncWithRootState = () => {
     }
   });
 };
+
+// generate test data
+generateTransactions({ blockchain, transactionPool, wallet, transactionMiner });
 
 
 let PEER_PORT;
