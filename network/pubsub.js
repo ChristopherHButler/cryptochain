@@ -7,8 +7,8 @@ class PubSub {
     this.blockchain = blockchain;
     this.transactionPool = transactionPool;
 
-    this.publisher = redis.createClient(redisUrl);
-    this.subscriber = redis.createClient(redisUrl);
+    this.publisher = redis.createClient(redisUrl, { tls: { rejectUnauthorized: false } });
+    this.subscriber = redis.createClient(redisUrl, { tls: { rejectUnauthorized: false } });
 
     this.subscribeToChannels();
 

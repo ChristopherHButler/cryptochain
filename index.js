@@ -9,6 +9,8 @@ const { DEFAULT_PORT, ROOT_NODE_ADDRESS, REDIS_DEV_URL, REDIS_PROD_URL } = requi
 
 const redisUrl = isDevelopment ? REDIS_DEV_URL : REDIS_PROD_URL;
 
+console.log('-----DEBUG INFO: isDevelopment: ', isDevelopment, ' redisUrl: ', redisUrl);
+
 const app = express();
 
 const Blockchain = require('./blockchain/blockchain');
