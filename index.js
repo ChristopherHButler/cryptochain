@@ -7,8 +7,6 @@ const isDevelopment = process.env.ENV === 'development';
 
 const { DEFAULT_PORT, ROOT_NODE_ADDRESS, REDIS_DEV_URL, REDIS_PROD_URL } = require('./constants/constants');
 
-const 
-
 const app = express();
 
 const Blockchain = require('./blockchain/blockchain');
