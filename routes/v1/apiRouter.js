@@ -15,7 +15,7 @@ router.get('/ping', apiController.ping);
 // @desc:   Get the blcoks in the block chain
 // @route:  GET /api/v1/blocks
 // @access: Public
-router.get('/blocks', apiController.getBlocks);
+router.get('/blockchain', apiController.getBlockchain);
 
 
 

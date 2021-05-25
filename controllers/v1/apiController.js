@@ -26,7 +26,7 @@ exports.ping = (req, res) => res.status(200).send({ status: 'success', msg: 'Cry
 // @desc:   Get all blocks in blockchain
 // @route:  GET /api/v1/blocks
 // @access: Public
-exports.getBlocks = asyncHandler(async (req, res, next) => {
+exports.getBlockchain = asyncHandler(async (req, res, next) => {
   res.json({ status: 'success', data: blockchain.chain });
 });
 

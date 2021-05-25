@@ -3,7 +3,11 @@ const express = require('express');
 const request = require('request');
 const colors = require('colors');
 
-const { DEFAULT_PORT, ROOT_NODE_ADDRESS } = require('./constants/constants');
+const isDevelopment = process.env.ENV === 'development';
+
+const { DEFAULT_PORT, ROOT_NODE_ADDRESS, REDIS_DEV_URL, REDIS_PROD_URL } = require('./constants/constants');
+
+const 
 
 const app = express();
 
@@ -19,7 +23,7 @@ const { generateTransactions } = require('./data/seeder');
 const blockchain = new Blockchain();
 const transactionPool = new TransactionPool();
 const wallet = new Wallet();
-const pubsub = new PubSub({ blockchain, transactionPool });
+const pubsub = new PubSub({ blockchain, transactionPool, redisUrl: isDevelopment ? REDIS_DEV_URL : REDIS_PROD_URL });
 const transactionMiner = new TransactionMiner({ blockchain, transactionPool, wallet, pubsub });
 
 module.exports = {
@@ -72,8 +76,11 @@ const syncWithRootState = () => {
   });
 };
 
-// generate test data
-generateTransactions({ blockchain, transactionPool, wallet, transactionMiner });
+if (isDevelopment) {
+  // generate test data
+  generateTransactions({ blockchain, transactionPool, wallet, transactionMiner });
+}
+
 
 
 let PEER_PORT;
@@ -82,7 +89,7 @@ if (process.env.GENERATE_PEER_PORT === 'true') {
   PEER_PORT = DEFAULT_PORT + Math.ceil(Math.random() * 1000);
 }
 
-const PORT = PEER_PORT || DEFAULT_PORT;
+const PORT = process.env.PORT || PEER_PORT || DEFAULT_PORT;
 
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`.yellow.cyan);

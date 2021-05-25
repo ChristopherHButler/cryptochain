@@ -1,17 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { Fragment } from 'react';
+import { ConnectedRouter } from 'connected-react-router';
 
-import Wallet from './Wallet';
-import Blocks from './Blocks';
+import Header from './layout/Header';
+
+import { Routes } from '../navigation/routes';
+import { history } from '../store/config';
+
 
 
 const App = () => {
 
   return (
-    <div>
-      <h1>Welcome to Cryptochain</h1>
-      <Wallet />
-      <Blocks />
-    </div>
+    <ConnectedRouter history={history}>
+      <Fragment>
+        <Header />
+        <div className="App">
+          <Routes />
+        </div>
+      </Fragment>
+    </ConnectedRouter>
   )
 }
 

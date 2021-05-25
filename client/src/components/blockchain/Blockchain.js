@@ -6,12 +6,12 @@ import uuid from 'uuid/v1';
 import Block from './Block';
 
 
-const Blocks = () => {
+const Blockchain = () => {
 
   const [blocks, setBlocks] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/api/v1/blocks')
+    axios.get(`${document.location.origin}/api/v1/blockchain`)
          .then((res) => {
            setBlocks(res.data.data);
          })
@@ -31,4 +31,4 @@ const Blocks = () => {
 };
 
 
-export default Blocks;
+export default Blockchain;
