@@ -9,8 +9,8 @@
     "dev": "npm run dev-client & npm run start-redis && cross-env ENV='development' nodemon index.js",
     "dev-peer": "cross-env GENERATE_PEER_PORT='true' ENV='development' nodemon index.js",
     "heroku-prebuild": "npm install --dev",
-    "start": "concurrently \"npm run build-client\"  \"node index.js\"",
-    "build-client": "parcel build client/public/index.html --out-dir client/dist",
+    "start": "npm run build-client && node index.js",
+    "build-client": "npm run clean && parcel build client/public/index.html --out-dir client/dist",
     "dev-client": "npm run clean && parcel client/public/index.html --out-dir client/dist",
     "clean": "rm -rf .cache client/dist"
   },
@@ -28,7 +28,6 @@
     "babel-preset-react": "^6.24.1",
     "bulmaswatch": "^0.8.1",
     "colors": "^1.4.0",
-    "concurrently": "^6.2.0",
     "connected-react-router": "^6.7.0",
     "elliptic": "^6.4.1",
     "express": "^4.16.3",

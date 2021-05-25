@@ -7,7 +7,7 @@ const isDevelopment = process.env.ENV === 'development';
 
 const { DEFAULT_PORT, ROOT_NODE_ADDRESS, REDIS_DEV_URL, REDIS_PROD_URL } = require('./constants/constants');
 
-const redisUrl = isDevelopment ? REDIS_DEV_URL : REDIS_PROD_URL;
+const redisUrl = REDIS_DEV_URL; // isDevelopment ? REDIS_DEV_URL : REDIS_PROD_URL;
 
 const app = express();
 
