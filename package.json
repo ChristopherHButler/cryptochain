@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "npm": "6.13.7",
+    "node": "12.14.1"
+  },
   "scripts": {
     "test": "jest --watchAll",
     "start-redis": "redis-server --daemonize yes",
