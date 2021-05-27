@@ -19,6 +19,20 @@ router.get('/blockchain', apiController.getBlockchain);
 
 
 
+// @desc:   Get the length of the blockchain
+// @route:  GET /api/v1/blocks/length
+// @access: Public
+router.get('/blocks/length', apiController.getBlockchainLength);
+
+
+
+// @desc:   Get a specified number of blocks in the blockchain (this is a way of doing pagination) using the starting blocks id
+// @route:  GET /api/v1/blockchain/:id
+// @access: Public
+router.get('/blockchain/:id/:blockLength', apiController.getBlocks);
+
+
+
 // @desc:   Add a block to the chain
 // @route:  POST /api/v1/mine
 // @access: Public
@@ -58,6 +72,14 @@ router.get('/mineTransactions', apiController.mineTransactions);
 // @route:  GET /api/v1/walletInformation
 // @access: Public
 router.get('/walletInformation', apiController.walletInformation);
+
+
+
+// @desc:   Get map of addresses
+// @route:  GET /api/v1/knownAddresses
+// @access: Public
+router.get('/knownAddresses', apiController.knownAddresses);
+
 
 
 module.exports = router;

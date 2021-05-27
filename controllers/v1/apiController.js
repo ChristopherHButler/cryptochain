@@ -32,6 +32,37 @@ exports.getBlockchain = asyncHandler(async (req, res, next) => {
 
 
 
+// @desc:   Get the length of the blockchain
+// @route:  GET /api/v1/blocks/length
+// @access: Public
+exports.getBlockchainLength = asyncHandler(async (req, res, next) => {
+  res.json({ status: 'success', data: blockchain.chain.length });
+});
+
+
+
+// @desc:   Get a specified number of blocks in the blockchain (this is a way of doing pagination) using the starting blocks id
+// @route:  GET /api/v1/blockchain/:id
+// @access: Public
+exports.getBlocks = asyncHandler(async (req, res, next) => {
+  const { id, blockLength } = req.params;
+  const { length } = blockchain.chain;
+
+  const reversedBlockchain = blockchain.chain.slice().reverse();
+
+  let startIndex = (id - 1) * blockLength;
+  let endIndex = id * blockLength;
+
+  startIndex = startIndex < length ? startIndex : length;
+  endIndex = endIndex < length ? endIndex : length;
+
+  res.json({ status: 'success', data: reversedBlockchain.slice(startIndex, endIndex) });
+});
+
+
+
+
+
 // @desc:   Add a block to the chain
 // @route:  POST /api/v1/mine
 // @access: Public
@@ -104,6 +135,31 @@ exports.walletInformation = asyncHandler(async (req, res, next) => {
     data: {
       address: wallet.publicKey,
       balance: Wallet.calculateBalance({ chain: blockchain.chain, address: wallet.publicKey }),
+    },
+  });
+});
+
+
+
+// @desc:   Get map of addresses
+// @route:  GET /api/v1/knownAddresses
+// @access: Public
+exports.knownAddresses = asyncHandler(async (req, res, next) => {
+
+  const addressMap = {};
+
+  for (let block of blockchain.chain) {
+    for (let transaction of block.data) {
+      const recipient = Object.keys(transaction.outputMap);
+
+      recipient.forEach(recipient => addressMap[recipient] = recipient);
+    }
+  }
+
+  res.json({
+    status: 'success',
+    data: {
+      addresses: Object.keys(addressMap),
     },
   });
 });

@@ -23,9 +23,13 @@ const Blockchain = () => {
   const renderBlocks = () => blocks.map(block => <Block key={uuid()} block={block} />);
 
   return (
-    <div>
-      <h3>Blocks</h3>
-      {renderBlocks()}
+    <div className="columns is-centered">
+      <div className="column is-half">
+        <div className="block" style={{ marginTop: '1.5em' }}>
+          <h3 className="title is-3">Le Blockchain</h3>
+        </div>
+        {renderBlocks()}
+      </div>
     </div>
   );
 };

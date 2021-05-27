@@ -11,7 +11,7 @@ const Header = () => {
     <div className="navbar is-dark">
       <div className="navbar-brand">
         <div className="navbar-item" onClick={() => history.push(ROUTES.HOME)}>
-          <h1 style={{ fontSize: '20px', marginLeft: '40px', cursor: 'pointer' }}>Cryptochain</h1>
+          <h1 style={{ fontSize: '20px', marginLeft: '40px', cursor: 'pointer' }}>Memecoin</h1>
         </div>
       </div>
       <div className="navbar-menu">

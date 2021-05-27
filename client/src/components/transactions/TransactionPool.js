@@ -35,7 +35,6 @@ const TransactionPool = () => {
     return Object.values(transactionPoolMap).map(transaction => {
       return (
         <div key={transaction.id}>
-          <hr />
           <Transaction transaction={transaction} />
         </div>
       );
@@ -43,10 +42,14 @@ const TransactionPool = () => {
   };
 
   return (
-    <div>
-      <h3>Transaction Pool Map</h3>
+    <div className="columns is-centered">
+    <div className="column is-half">
+      <div className="block" style={{ marginTop: '1.5em' }}>
+        <h3 className="title is-3">Transaction Pool Map</h3>
+      </div>
       {renderTransactions()}
     </div>
+  </div>
   );
 };
 
